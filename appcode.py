@@ -11,7 +11,7 @@ def load_model():
     return model
 
 # Define the class names
-class_names = ["Class 1", "Class 2"]
+class_names = ["Fist", "Palm"]
 
 # Function to preprocess and predict hand gestures
 def predict_gesture(model, image):
@@ -48,10 +48,10 @@ if st.button("Predict") and uploaded_files:
                 st.write(f"Confidence Score: {confidence_score}")
 
                 # Display the prediction result
-                if class_name == 'Class 1':
-                    st.markdown("<h3 style='text-align: center; color: blue;'>It's Class 1</h3>", unsafe_allow_html=True)
-                elif class_name == 'Class 2':
-                    st.markdown("<h3 style='text-align: center; color: green;'>It's Class 2</h3>", unsafe_allow_html=True)
+                if class_name == 'Fist':
+                    st.markdown("<h3 style='text-align: center; color: blue;'>It's a Fist</h3>", unsafe_allow_html=True)
+                elif class_name == 'Palm':
+                    st.markdown("<h3 style='text-align: center; color: green;'>It's a Palm</h3>", unsafe_allow_html=True)
     except OSError:
         st.error("Error loading the model. Please ensure that the model file exists and is accessible.")
     except Exception as e:
