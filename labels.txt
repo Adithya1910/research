@@ -1,0 +1,2 @@
+0 Palm
+1 Fist
