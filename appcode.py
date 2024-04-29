@@ -4,7 +4,7 @@ import numpy as np
 from tensorflow.keras.models import load_model
 
 # Load the pre-trained model
-model = load_model("keras_model.h5", compile=False)
+model = load_model("keras_model.h5")
 
 # Define the class names
 class_names = ["Fist", "Palm"]
@@ -39,7 +39,7 @@ if st.button("Predict") and uploaded_files:
             class_name, confidence_score = predict_gesture(image)
             st.write(f"Predicted Gesture: {class_name}")
             st.write(f"Confidence Score: {confidence_score}")
-
+            
             # Display the prediction result
             if class_name == 'Fist':
                 st.markdown("<h3 style='text-align: center; color: blue;'>It's a Fist</h3>", unsafe_allow_html=True)
@@ -48,4 +48,3 @@ if st.button("Predict") and uploaded_files:
 
 # Display a thank you message
 st.markdown("<h4 style='text-align: center; color: orange;'>Thanks for using our Hand Gesture Recognition App!</h4>", unsafe_allow_html=True)
-
