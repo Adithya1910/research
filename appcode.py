@@ -1,16 +1,19 @@
 import streamlit as st
 import cv2
 import numpy as np
-from tensorflow.keras.models import load_model
+import tensorflow as tf
 
-# Load the pre-trained model
-model = load_model("keras_model.h5")
+# Define a custom function to load the Keras model
+@st.cache(allow_output_mutation=True)
+def load_model():
+    model = tf.keras.models.load_model("keras_model.h5")
+    return model
 
 # Define the class names
 class_names = ["Fist", "Palm"]
 
 # Function to preprocess and predict hand gestures
-def predict_gesture(image):
+def predict_gesture(model, image):
     image = cv2.resize(image, (224, 224), interpolation=cv2.INTER_AREA)
     image = np.asarray(image, dtype=np.float32).reshape(1, 224, 224, 3)
     image = (image / 127.5) - 1
@@ -26,6 +29,8 @@ st.title("Hand Gesture Recognition")
 uploaded_files = st.file_uploader("Upload images", type=["jpg", "jpeg", "png"], accept_multiple_files=True)
 
 if st.button("Predict") and uploaded_files:
+    model = load_model()  # Load the model
+
     cols = st.columns(2)
     for i, uploaded_file in enumerate(uploaded_files):
         # Read and decode the uploaded image
@@ -36,7 +41,7 @@ if st.button("Predict") and uploaded_files:
         # Display the image and perform the prediction
         with cols[i % 2]:
             st.image(image_rgb, width=200, caption=f'Image {i+1}: {uploaded_file.name}')
-            class_name, confidence_score = predict_gesture(image)
+            class_name, confidence_score = predict_gesture(model, image)
             st.write(f"Predicted Gesture: {class_name}")
             st.write(f"Confidence Score: {confidence_score}")
             
