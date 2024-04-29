@@ -6,7 +6,8 @@ import tensorflow as tf
 # Define a custom function to load the Keras model
 @st.cache(allow_output_mutation=True)
 def load_model():
-    model = tf.keras.models.load_model("keras_model.h5")
+    custom_objects = {'DepthwiseConv2D': tf.keras.layers.DepthwiseConv2D}
+    model = tf.keras.models.load_model("keras_model.h5", custom_objects=custom_objects)
     return model
 
 # Define the class names
