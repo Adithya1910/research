@@ -46,9 +46,9 @@ if st.button("Predict") and uploaded_files:
             st.write(f"Confidence Score: {confidence_score}")
             
             # Display the prediction result
-            if class_name == 'Fist':
+            if class_name == 'Class 1':
                 st.markdown("<h3 style='text-align: center; color: blue;'>It's a Fist</h3>", unsafe_allow_html=True)
-            elif class_name == 'Palm':
+            elif class_name == 'Class 2':
                 st.markdown("<h3 style='text-align: center; color: green;'>It's a Palm</h3>", unsafe_allow_html=True)
 
 # Display a thank you message
